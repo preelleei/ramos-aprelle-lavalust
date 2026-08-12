@@ -10,27 +10,38 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700;800&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
+
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         :root {
-            --lava: #dd4814;
-            --lava-dim: #b83a10;
-            --lava-glow: rgba(221,72,20,0.15);
-            --lava-glow-strong: rgba(221,72,20,0.25);
-            --bg: #0a0a0b;
-            --bg2: #111113;
-            --bg3: #18181b;
-            --border: rgba(255,255,255,0.07);
-            --border-hot: rgba(221,72,20,0.35);
-            --text: #f4f4f5;
-            --text-muted: #71717a;
-            --text-dim: #3f3f46;
+            --lava: #8fd3a8;
+            --lava-dim: #f3a6b8;
+            --lava-glow: rgba(143, 211, 168, 0.15);
+            --lava-glow-strong: rgba(243, 166, 184, 0.25);
+
+            --bg: #101714;
+            --bg2: #151d19;
+            --bg3: #1c2722;
+
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hot: rgba(243, 166, 184, 0.35);
+
+            --text: #f4f8f5;
+            --text-muted: #9aa8a0;
+            --text-dim: #56635c;
+
             --mono: 'JetBrains Mono', monospace;
             --sans: 'Unbounded', sans-serif;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--sans);
@@ -62,7 +73,11 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             background-size: 60px 60px;
             pointer-events: none;
             z-index: 0;
-            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 100%);
+            mask-image: radial-gradient(
+                ellipse 80% 60% at 50% 0%,
+                black 30%,
+                transparent 100%
+            );
         }
 
         /* ── GLOW ORBS ── */
@@ -73,15 +88,29 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             pointer-events: none;
             z-index: 0;
         }
+
         .orb-1 {
-            width: 600px; height: 600px;
-            top: -200px; left: -100px;
-            background: radial-gradient(circle, rgba(221,72,20,0.12) 0%, transparent 70%);
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            left: -100px;
+            background: radial-gradient(
+                circle,
+                rgba(143, 211, 168, 0.12) 0%,
+                transparent 70%
+            );
         }
+
         .orb-2 {
-            width: 400px; height: 400px;
-            top: 200px; right: -100px;
-            background: radial-gradient(circle, rgba(221,72,20,0.07) 0%, transparent 70%);
+            width: 400px;
+            height: 400px;
+            top: 200px;
+            right: -100px;
+            background: radial-gradient(
+                circle,
+                rgba(243, 166, 184, 0.10) 0%,
+                transparent 70%
+            );
         }
 
         /* ── LAYOUT ── */
@@ -103,7 +132,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             padding: 1.5rem 2rem;
             border-bottom: 1px solid var(--border);
             backdrop-filter: blur(12px);
-            background: rgba(10,10,11,0.6);
+            background: rgba(16, 23, 20, 0.75);
             max-width: 100%;
         }
 
@@ -119,7 +148,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .nav-logo .flame {
-            width: 28px; height: 28px;
+            width: 28px;
+            height: 28px;
             background: var(--lava);
             border-radius: 6px;
             display: flex;
@@ -145,10 +175,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             transition: color 0.2s, background 0.2s;
         }
 
-        .nav-links a:hover { color: var(--text); background: var(--bg3); }
+        .nav-links a:hover {
+            color: var(--text);
+            background: var(--bg3);
+        }
 
         .nav-links .btn-nav {
-            color: var(--text);
+            color: #17351f;
             background: var(--lava);
             padding: 0.4rem 1rem;
             border-radius: 6px;
@@ -158,6 +191,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         .nav-links .btn-nav:hover {
             background: var(--lava-dim);
+            color: #3d1c27;
             box-shadow: 0 0 20px var(--lava-glow-strong);
         }
 
@@ -173,9 +207,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: rgba(221,72,20,0.1);
+            background: rgba(243, 166, 184, 0.10);
             border: 1px solid var(--border-hot);
-            color: #f97316;
+            color: #f3a6b8;
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.08em;
@@ -188,7 +222,8 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         .badge::before {
             content: '';
-            width: 6px; height: 6px;
+            width: 6px;
+            height: 6px;
             background: var(--lava);
             border-radius: 50%;
             box-shadow: 0 0 8px var(--lava);
@@ -196,8 +231,15 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--lava); }
-            50% { opacity: 0.5; box-shadow: 0 0 3px var(--lava); }
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 8px var(--lava);
+            }
+
+            50% {
+                opacity: 0.5;
+                box-shadow: 0 0 3px var(--lava);
+            }
         }
 
         .hero h1 {
@@ -208,10 +250,13 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 .word-lava { color: var(--lava); }
+        .hero h1 .word-lava {
+            color: var(--lava);
+        }
+
         .hero h1 .word-lust {
             color: transparent;
-            -webkit-text-stroke: 1.5px rgba(255,255,255,0.3);
+            -webkit-text-stroke: 1.5px rgba(243, 166, 184, 0.65);
         }
 
         .hero-sub {
@@ -248,13 +293,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         .btn-primary {
             background: var(--lava);
-            color: #fff;
+            color: #17351f;
             box-shadow: 0 0 0 0 var(--lava-glow);
         }
 
         .btn-primary:hover {
             background: var(--lava-dim);
-            box-shadow: 0 0 30px var(--lava-glow-strong), 0 4px 15px rgba(0,0,0,0.3);
+            color: #3d1c27;
+            box-shadow:
+                0 0 30px var(--lava-glow-strong),
+                0 4px 15px rgba(0, 0, 0, 0.3);
             transform: translateY(-1px);
         }
 
@@ -266,7 +314,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         .btn-ghost:hover {
             color: var(--text);
-            border-color: rgba(255,255,255,0.2);
+            border-color: rgba(243, 166, 184, 0.35);
             background: var(--bg3);
         }
 
@@ -283,7 +331,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             z-index: 1;
         }
 
-        .stat { text-align: center; }
+        .stat {
+            text-align: center;
+        }
 
         .stat-value {
             font-size: 2rem;
@@ -293,7 +343,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             line-height: 1;
         }
 
-        .stat-value span { color: var(--lava); }
+        .stat-value span {
+            color: var(--lava);
+        }
 
         .stat-label {
             font-size: 0.78rem;
@@ -355,24 +407,36 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             position: relative;
         }
 
-        .feature:hover { background: var(--bg2); }
+        .feature:hover {
+            background: var(--bg2);
+        }
 
         .feature::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--lava-glow-strong), transparent);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--lava-glow-strong),
+                transparent
+            );
             opacity: 0;
             transition: opacity 0.3s;
         }
 
-        .feature:hover::before { opacity: 1; }
+        .feature:hover::before {
+            opacity: 1;
+        }
 
         .feature-icon {
-            width: 40px; height: 40px;
-            background: rgba(221,72,20,0.1);
-            border: 1px solid var(--border-hot);
+            width: 40px;
+            height: 40px;
+            background: rgba(143, 211, 168, 0.10);
+            border: 1px solid rgba(143, 211, 168, 0.30);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -418,10 +482,23 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             background: var(--bg3);
         }
 
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot-r { background: #ff5f57; }
-        .dot-y { background: #febc2e; }
-        .dot-g { background: #28c840; }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-r {
+            background: #f3a6b8;
+        }
+
+        .dot-y {
+            background: #f4d7a1;
+        }
+
+        .dot-g {
+            background: #8fd3a8;
+        }
 
         .code-filename {
             font-family: var(--mono);
@@ -435,21 +512,41 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             font-family: var(--mono);
             font-size: 0.82rem;
             line-height: 1.8;
-            color: #a1a1aa;
+            color: #aab8b0;
             overflow-x: auto;
         }
 
-        .code-body .kw { color: #f97316; }
-        .code-body .fn { color: #60a5fa; }
-        .code-body .str { color: #86efac; }
-        .code-body .cm { color: #3f3f46; }
-        .code-body .cl { color: #fde68a; }
-        .code-body .var { color: #c4b5fd; }
+        .code-body .kw {
+            color: #f3a6b8;
+        }
+
+        .code-body .fn {
+            color: #9fd9bd;
+        }
+
+        .code-body .str {
+            color: #b8e6c9;
+        }
+
+        .code-body .cm {
+            color: #56635c;
+        }
+
+        .code-body .cl {
+            color: #f4d7a1;
+        }
+
+        .code-body .var {
+            color: #d7b8c4;
+        }
 
         /* ── STRUCTURE ── */
         .structure-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(180px, 1fr)
+            );
             gap: 0.5rem;
             margin-top: 2rem;
         }
@@ -469,12 +566,15 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .dir-item:hover {
-            border-color: var(--border-hot);
+            border-color: rgba(243, 166, 184, 0.35);
             color: var(--text);
-            background: rgba(221,72,20,0.05);
+            background: rgba(243, 166, 184, 0.05);
         }
 
-        .dir-item .dir-icon { color: var(--lava); font-size: 0.9rem; }
+        .dir-item .dir-icon {
+            color: var(--lava);
+            font-size: 0.9rem;
+        }
 
         /* ── FOOTER ── */
         footer {
@@ -503,7 +603,9 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             flex-wrap: wrap;
         }
 
-        .footer-meta span { color: var(--text-muted); }
+        .footer-meta span {
+            color: var(--text-muted);
+        }
 
         .footer-links {
             display: flex;
@@ -517,12 +619,19 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             transition: color 0.2s;
         }
 
-        .footer-links a:hover { color: var(--lava); }
+        .footer-links a:hover {
+            color: var(--lava);
+        }
 
         /* ── DIVIDER ── */
         .divider {
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--border),
+                transparent
+            );
             margin: 0 2rem;
             position: relative;
             z-index: 1;
@@ -530,28 +639,61 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 
         /* ── ANIMATIONS ── */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero > * {
             animation: fadeUp 0.6s ease both;
         }
 
-        .hero .badge         { animation-delay: 0.05s; }
-        .hero h1             { animation-delay: 0.15s; }
-        .hero .hero-sub      { animation-delay: 0.25s; }
-        .hero .hero-actions  { animation-delay: 0.35s; }
+        .hero .badge {
+            animation-delay: 0.05s;
+        }
+
+        .hero h1 {
+            animation-delay: 0.15s;
+        }
+
+        .hero .hero-sub {
+            animation-delay: 0.25s;
+        }
+
+        .hero .hero-actions {
+            animation-delay: 0.35s;
+        }
 
         @media (max-width: 768px) {
-            .features-layout { grid-template-columns: 1fr; }
-            .code-section { grid-template-columns: 1fr; }
-            nav { padding: 1rem 1.5rem; }
-            .nav-links a:not(.btn-nav) { display: none; }
-            section { padding: 3rem 1.5rem; }
+            .features-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .code-section {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links a:not(.btn-nav) {
+                display: none;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
         }
     </style>
 </head>
+
 <body>
 
 <div class="orb orb-1"></div>
@@ -563,155 +705,357 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         <div class="flame">🔥</div>
         LavaLust
     </a>
+
     <div class="nav-links">
         <a href="https://lavalust.netlify.app/docs/" target="_blank">Docs</a>
-        <a href="https://github.com/ronmarasigan/LavaLust" target="_blank">GitHub</a>
-        <a href="https://lavalust.netlify.app/docs/" target="_blank" class="btn-nav">Get Started →</a>
+
+        <a href="https://github.com/ronmarasigan/LavaLust" target="_blank">
+            GitHub
+        </a>
+
+        <a
+            href="https://lavalust.netlify.app/docs/"
+            target="_blank"
+            class="btn-nav"
+        >
+            Get Started →
+        </a>
     </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero wrap">
-    <div class="badge">v<?php echo config_item('VERSION') ?? '4.x'; ?> — Now Available</div>
+
+    <div class="badge">
+        v<?php echo config_item('VERSION') ?? '4.x'; ?> — Now Available
+    </div>
+
     <h1>
-        <span class="word-lava">Lava</span><span class="word-lust">Lust</span><br>Framework
+        <span class="word-lava">Lava</span><span class="word-lust">Lust</span><br>
+        Framework
     </h1>
+
     <p class="hero-sub">
-        A lightweight, expressive PHP MVC framework built for developers who want structure without the bloat.
+        A lightweight, expressive PHP MVC framework built for developers
+        who want structure without the bloat.
     </p>
+
     <div class="hero-actions">
-        <a href="https://lavalust.netlify.app/docs/" target="_blank" class="btn btn-primary">
+
+        <a
+            href="https://lavalust.netlify.app/docs/"
+            target="_blank"
+            class="btn btn-primary"
+        >
             Read the Docs
         </a>
-        <a href="https://github.com/ronmarasigan/LavaLust" target="_blank" class="btn btn-ghost">
+
+        <a
+            href="https://github.com/ronmarasigan/LavaLust"
+            target="_blank"
+            class="btn btn-ghost"
+        >
             View on GitHub
         </a>
+
     </div>
 </div>
 
 <!-- STATS -->
 <div class="stats">
+
     <div class="stat">
-        <div class="stat-value">MVC<span>+</span></div>
-        <div class="stat-label">Architecture</div>
+        <div class="stat-value">
+            MVC<span>+</span>
+        </div>
+        <div class="stat-label">
+            Architecture
+        </div>
     </div>
+
     <div class="stat">
-        <div class="stat-value"><span>4</span> DB</div>
-        <div class="stat-label">Drivers</div>
+        <div class="stat-value">
+            <span>4</span> DB
+        </div>
+        <div class="stat-label">
+            Drivers
+        </div>
     </div>
+
     <div class="stat">
-        <div class="stat-value">HMVC<span>✓</span></div>
-        <div class="stat-label">Module Support</div>
+        <div class="stat-value">
+            HMVC<span>✓</span>
+        </div>
+        <div class="stat-label">
+            Module Support
+        </div>
     </div>
+
     <div class="stat">
-        <div class="stat-value">REST<span>*</span></div>
-        <div class="stat-label">API Ready</div>
+        <div class="stat-value">
+            REST<span>*</span>
+        </div>
+        <div class="stat-label">
+            API Ready
+        </div>
     </div>
+
 </div>
 
 <div class="divider"></div>
 
 <!-- FEATURES -->
 <section>
+
     <div class="wrap">
-        <div class="section-label">// features</div>
-        <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
-        <p class="section-desc">LavaLust gives you a clean, consistent structure so you can focus on building — not configuring.</p>
+
+        <div class="section-label">
+            // features
+        </div>
+
+        <h2 class="section-title">
+            Everything you need.<br>
+            Nothing you don't.
+        </h2>
+
+        <p class="section-desc">
+            LavaLust gives you a clean, consistent structure so you can
+            focus on building — not configuring.
+        </p>
 
         <div class="features-layout">
+
             <div class="feature">
                 <div class="feature-icon">🧠</div>
-                <h3>MVC Architecture</h3>
-                <p>Clean separation between Models, Views, and Controllers keeps your codebase maintainable as it grows.</p>
+
+                <h3>
+                    MVC Architecture
+                </h3>
+
+                <p>
+                    Clean separation between Models, Views, and Controllers
+                    keeps your codebase maintainable as it grows.
+                </p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">⚙️</div>
-                <h3>Flexible Routing</h3>
-                <p>Define routes with GET, POST, PUT, DELETE and more. Supports named routes, closures, and grouped prefixes.</p>
+
+                <h3>
+                    Flexible Routing
+                </h3>
+
+                <p>
+                    Define routes with GET, POST, PUT, DELETE and more.
+                    Supports named routes, closures, and grouped prefixes.
+                </p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">🗄️</div>
-                <h3>ORM-style Models</h3>
-                <p>Fluent query builder with relationships, soft deletes, timestamps, mass assignment protection, and eager loading.</p>
+
+                <h3>
+                    ORM-style Models
+                </h3>
+
+                <p>
+                    Fluent query builder with relationships, soft deletes,
+                    timestamps, mass assignment protection, and eager loading.
+                </p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">📦</div>
-                <h3>HMVC Modules</h3>
-                <p>Scale your app with self-contained modules. Each module owns its controllers, models, and views.</p>
+
+                <h3>
+                    HMVC Modules
+                </h3>
+
+                <p>
+                    Scale your app with self-contained modules. Each module
+                    owns its controllers, models, and views.
+                </p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">🔗</div>
-                <h3>REST API Support</h3>
-                <p>Build JSON APIs out of the box using built-in conventions, response helpers, and content negotiation.</p>
+
+                <h3>
+                    REST API Support
+                </h3>
+
+                <p>
+                    Build JSON APIs out of the box using built-in conventions,
+                    response helpers, and content negotiation.
+                </p>
             </div>
+
             <div class="feature">
                 <div class="feature-icon">🛡️</div>
-                <h3>Libraries & Helpers</h3>
-                <p>Sessions, form validation, file uploads, pagination, encryption — batteries included where it counts.</p>
+
+                <h3>
+                    Libraries & Helpers
+                </h3>
+
+                <p>
+                    Sessions, form validation, file uploads, pagination,
+                    encryption — batteries included where it counts.
+                </p>
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <div class="divider"></div>
 
 <!-- CODE EXAMPLE -->
 <section>
+
     <div class="wrap">
+
         <div class="code-section">
+
             <div>
-                <div class="section-label">// quick start</div>
-                <h2 class="section-title">Up and running in minutes.</h2>
-                <p class="section-desc">Define a route, write a controller method, render a view. That's the whole loop.</p>
+
+                <div class="section-label">
+                    // quick start
+                </div>
+
+                <h2 class="section-title">
+                    Up and running in minutes.
+                </h2>
+
+                <p class="section-desc">
+                    Define a route, write a controller method, render a view.
+                    That's the whole loop.
+                </p>
+
             </div>
 
             <div>
+
                 <div class="code-block" style="margin-bottom:1rem;">
+
                     <div class="code-header">
                         <div class="dot dot-r"></div>
                         <div class="dot dot-y"></div>
                         <div class="dot dot-g"></div>
-                        <span class="code-filename">app/config/routes.php</span>
+
+                        <span class="code-filename">
+                            app/config/routes.php
+                        </span>
                     </div>
+
                     <div class="code-body">
-<span class="var">$router</span>-><span class="fn">get</span>(<span class="str">'/'</span>, <span class="str">'Welcome::index'</span>);<br>
-<span class="var">$router</span>-><span class="fn">get</span>(<span class="str">'/users'</span>, <span class="str">'Users::index'</span>);<br>
-<span class="var">$router</span>-><span class="fn">post</span>(<span class="str">'/users/store'</span>, <span class="str">'Users::store'</span>);
+
+                        <span class="var">$router</span>->
+                        <span class="fn">get</span>(
+                        <span class="str">'/'</span>,
+                        <span class="str">'Welcome::index'</span>
+                        );<br>
+
+                        <span class="var">$router</span>->
+                        <span class="fn">get</span>(
+                        <span class="str">'/users'</span>,
+                        <span class="str">'Users::index'</span>
+                        );<br>
+
+                        <span class="var">$router</span>->
+                        <span class="fn">post</span>(
+                        <span class="str">'/users/store'</span>,
+                        <span class="str">'Users::store'</span>
+                        );
+
                     </div>
+
                 </div>
 
                 <div class="code-block">
+
                     <div class="code-header">
                         <div class="dot dot-r"></div>
                         <div class="dot dot-y"></div>
                         <div class="dot dot-g"></div>
-                        <span class="code-filename">app/controllers/Welcome.php</span>
+
+                        <span class="code-filename">
+                            app/controllers/Welcome.php
+                        </span>
                     </div>
+
                     <div class="code-body">
-<span class="kw">class</span> <span class="cl">Welcome</span> <span class="kw">extends</span> <span class="cl">Controller</span> {<br>
-&nbsp;&nbsp;<span class="kw">public function</span> <span class="fn">index</span>() {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">$this</span>-><span class="fn">call</span>-><span class="fn">model</span>(<span class="str">'UserModel'</span>);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">$data</span>[<span class="str">'users'</span>] = <span class="var">$this</span>-><span class="cl">UserModel</span>-><span class="fn">all</span>();<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<span class="var">$this</span>-><span class="fn">call</span>-><span class="fn">view</span>(<span class="str">'welcome'</span>, <span class="var">$data</span>);<br>
-&nbsp;&nbsp;}<br>
-}
+
+                        <span class="kw">class</span>
+                        <span class="cl">Welcome</span>
+                        <span class="kw">extends</span>
+                        <span class="cl">Controller</span> {<br>
+
+                        &nbsp;&nbsp;
+                        <span class="kw">public function</span>
+                        <span class="fn">index</span>() {<br>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="var">$this</span>->
+                        <span class="fn">call</span>->
+                        <span class="fn">model</span>(
+                        <span class="str">'UserModel'</span>
+                        );<br>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="var">$data</span>[
+                        <span class="str">'users'</span>
+                        ] =
+                        <span class="var">$this</span>->
+                        <span class="cl">UserModel</span>->
+                        <span class="fn">all</span>();<br>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="var">$this</span>->
+                        <span class="fn">call</span>->
+                        <span class="fn">view</span>(
+                        <span class="str">'welcome'</span>,
+                        <span class="var">$data</span>
+                        );<br>
+
+                        &nbsp;&nbsp;}<br>
+                        }
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <div class="divider"></div>
 
 <!-- STRUCTURE -->
 <section>
+
     <div class="wrap">
-        <div class="section-label">// project structure</div>
-        <h2 class="section-title">Organized by default.</h2>
-        <p class="section-desc">A predictable directory layout so every file has a logical home from day one.</p>
+
+        <div class="section-label">
+            // project structure
+        </div>
+
+        <h2 class="section-title">
+            Organized by default.
+        </h2>
+
+        <p class="section-desc">
+            A predictable directory layout so every file has a logical
+            home from day one.
+        </p>
 
         <div class="structure-grid">
+
             <?php
             $dirs = [
                 ['app/config',      '⚙'],
@@ -729,33 +1073,93 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
                 ['console/',        '💻'],
                 ['scheme/',         '📐'],
             ];
-            foreach ($dirs as [$name, $icon]): ?>
-            <div class="dir-item">
-                <span class="dir-icon"><?php echo $icon; ?></span>
-                <?php echo $name; ?>
-            </div>
+
+            foreach ($dirs as [$name, $icon]):
+            ?>
+
+                <div class="dir-item">
+
+                    <span class="dir-icon">
+                        <?php echo $icon; ?>
+                    </span>
+
+                    <?php echo $name; ?>
+
+                </div>
+
             <?php endforeach; ?>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- FOOTER -->
 <footer>
+
     <div class="footer-inner">
+
         <div class="footer-meta">
-            <span>rendered in <span><?php echo lava_instance()->performance->elapsed_time('lavalust'); ?>s</span></span>
-            <span>memory <span><?php echo lava_instance()->performance->memory_usage(); ?></span></span>
+
+            <span>
+                rendered in
+                <span>
+                    <?php echo lava_instance()->performance->elapsed_time('lavalust'); ?>s
+                </span>
+            </span>
+
+            <span>
+                memory
+                <span>
+                    <?php echo lava_instance()->performance->memory_usage(); ?>
+                </span>
+            </span>
+
             <?php if(config_item('environment') === 'development'): ?>
-            <span>version <span><?php echo config_item('version'); ?></span></span>
-            <span style="color: #dd4814;">● development</span>
+
+                <span>
+                    version
+                    <span>
+                        <?php echo config_item('version'); ?>
+                    </span>
+                </span>
+
+                <span style="color: #f3a6b8;">
+                    ● development
+                </span>
+
             <?php endif; ?>
+
         </div>
+
         <div class="footer-links">
-            <a href="https://github.com/ronmarasigan/LavaLust" target="_blank">GitHub</a>
-            <a href="https://lavalust.netlify.app/docs/" target="_blank">Docs</a>
-            <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>
+
+            <a
+                href="https://github.com/ronmarasigan/LavaLust"
+                target="_blank"
+            >
+                GitHub
+            </a>
+
+            <a
+                href="https://lavalust.netlify.app/docs/"
+                target="_blank"
+            >
+                Docs
+            </a>
+
+            <a
+                href="https://opensource.org/licenses/MIT"
+                target="_blank"
+            >
+                MIT License
+            </a>
+
         </div>
+
     </div>
+
 </footer>
 
 </body>
