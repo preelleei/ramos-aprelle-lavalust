@@ -118,10 +118,9 @@ switch (strtolower(config_item('environment')))
 	break;
 
 	case 'testing':
-	case 'production':		
-		ini_set('display_errors', 1);
-		error_reporting(-1);
-		_handlers();
+	case 'production':
+		echo "PRODUCTION MODE IS RUNNING";
+		exit;
 	break;
 
 	default :
