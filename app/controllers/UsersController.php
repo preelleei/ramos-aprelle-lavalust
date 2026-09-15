@@ -13,197 +13,232 @@ class UsersController extends Controller
         $this->call->library('form_validation');
     }
 
+    // ==============================
     // READ - Display all users
+    // ==============================
+
     public function index()
     {
         $users = $this->UsersModel->all();
 
         $data['users'] = $users;
+        $data['success'] = $this->session->flashdata('success');
 
         $this->call->view('users/index', $data);
     }
 
+
+    // ==============================
     // CREATE - Display create form
+    // ==============================
+
     public function create()
     {
-        $this->call->view('users/create');
+        $data['errors'] = '';
+
+        $this->call->view('users/create', $data);
     }
 
+
+    // ==============================
     // CREATE - Save new user
+    // ==============================
+
     public function store()
     {
-        // Form validation rules
-        $this->form_validation->set_rules(
-            'firstname',
-            'First Name',
-            'required'
-        );
+        if ($this->form_validation->validate([
 
-        $this->form_validation->set_rules(
-            'lastname',
-            'Last Name',
-            'required'
-        );
+            'firstname|First Name' =>
+                'required',
 
-        $this->form_validation->set_rules(
-            'email',
-            'Email',
-            'required|valid_email'
-        );
+            'lastname|Last Name' =>
+                'required',
 
-        $this->form_validation->set_rules(
-            'username',
-            'Username',
-            'required|min_length[5]'
-        );
+            'email|Email' =>
+                'required|valid_email',
 
-        $this->form_validation->set_rules(
-            'password',
-            'Password',
-            'required|min_length[5]'
-        );
+            'username|Username' =>
+                'required|min_length[5]',
 
-        $this->form_validation->set_rules(
-            'confirm_password',
-            'Confirm Password',
-            'required|matches[password]'
-        );
+            'password|Password' =>
+                'required|min_length[5]',
 
-        // If validation fails
-        if ($this->form_validation->run() == FALSE) {
-            $this->call->view('users/create');
-            return;
+            'confirm_password|Confirm Password' =>
+                'required|matches[password]'
+
+        ])) {
+
+            $data = [
+
+                'firstname' =>
+                    $this->io->post('firstname'),
+
+                'lastname' =>
+                    $this->io->post('lastname'),
+
+                'email' =>
+                    $this->io->post('email'),
+
+                'username' =>
+                    $this->io->post('username'),
+
+                'password' =>
+                    password_hash(
+                        $this->io->post('password'),
+                        PASSWORD_DEFAULT
+                    )
+
+            ];
+
+            $this->UsersModel->insert($data);
+
+            $this->session->set_flashdata(
+                'success',
+                'Username created successfully.'
+            );
+
+            redirect('/users');
+
+        } else {
+
+            $data['errors'] =
+                $this->form_validation->errors();
+
+            $this->call->view(
+                'users/create',
+                $data
+            );
         }
-
-        // Data to insert
-        $data = [
-            'firstname' => $this->io->post('firstname'),
-            'lastname'  => $this->io->post('lastname'),
-            'email'     => $this->io->post('email'),
-            'username'  => $this->io->post('username'),
-            'password'  => password_hash(
-                $this->io->post('password'),
-                PASSWORD_DEFAULT
-            )
-        ];
-
-        // Insert into database
-        $this->UsersModel->insert($data);
-
-        // Success message
-        $this->session->set_flashdata(
-            'success',
-            'Username created successfully.'
-        );
-
-        redirect('/users');
     }
 
+
+    // ==============================
     // UPDATE - Display edit form
+    // ==============================
+
     public function edit($id)
     {
         $user = $this->UsersModel->find($id);
 
         if (!$user) {
+
             redirect('/users');
+
             return;
         }
 
         $data['user'] = $user;
+        $data['errors'] = '';
 
-        $this->call->view('users/edit', $data);
+        $this->call->view(
+            'users/edit',
+            $data
+        );
     }
 
+
+    // ==============================
     // UPDATE - Save edited user
+    // ==============================
+
     public function update($id)
     {
-        // Form validation rules
-        $this->form_validation->set_rules(
-            'firstname',
-            'First Name',
-            'required'
-        );
+        $rules = [
 
-        $this->form_validation->set_rules(
-            'lastname',
-            'Last Name',
-            'required'
-        );
+            'firstname|First Name' =>
+                'required',
 
-        $this->form_validation->set_rules(
-            'email',
-            'Email',
-            'required|valid_email'
-        );
+            'lastname|Last Name' =>
+                'required',
 
-        $this->form_validation->set_rules(
-            'username',
-            'Username',
-            'required|min_length[5]'
-        );
+            'email|Email' =>
+                'required|valid_email',
 
-        // Password is optional when updating
+            'username|Username' =>
+                'required|min_length[5]'
+
+        ];
+
+
         if ($this->io->post('password')) {
 
-            $this->form_validation->set_rules(
-                'password',
-                'Password',
-                'min_length[5]'
-            );
+            $rules['password|Password'] =
+                'min_length[5]';
 
-            $this->form_validation->set_rules(
-                'confirm_password',
-                'Confirm Password',
-                'matches[password]'
-            );
+            $rules['confirm_password|Confirm Password'] =
+                'matches[password]';
         }
 
-        // If validation fails
-        if ($this->form_validation->run() == FALSE) {
 
-            $user = $this->UsersModel->find($id);
+        if ($this->form_validation->validate($rules)) {
+
+            $data = [
+
+                'firstname' =>
+                    $this->io->post('firstname'),
+
+                'lastname' =>
+                    $this->io->post('lastname'),
+
+                'email' =>
+                    $this->io->post('email'),
+
+                'username' =>
+                    $this->io->post('username')
+
+            ];
+
+
+            if ($this->io->post('password')) {
+
+                $data['password'] =
+                    password_hash(
+                        $this->io->post('password'),
+                        PASSWORD_DEFAULT
+                    );
+            }
+
+
+            $this->UsersModel->update(
+                $id,
+                $data
+            );
+
+
+            $this->session->set_flashdata(
+                'success',
+                'Account updated.'
+            );
+
+
+            redirect('/users');
+
+        } else {
+
+            $user =
+                $this->UsersModel->find($id);
 
             $data['user'] = $user;
 
-            $this->call->view('users/edit', $data);
-            return;
-        }
+            $data['errors'] =
+                $this->form_validation->errors();
 
-        // Data to update
-        $data = [
-            'firstname' => $this->io->post('firstname'),
-            'lastname'  => $this->io->post('lastname'),
-            'email'     => $this->io->post('email'),
-            'username'  => $this->io->post('username')
-        ];
-
-        // Only update password if a new password was entered
-        if ($this->io->post('password')) {
-
-            $data['password'] = password_hash(
-                $this->io->post('password'),
-                PASSWORD_DEFAULT
+            $this->call->view(
+                'users/edit',
+                $data
             );
         }
-
-        // Update database
-        $this->UsersModel->update($id, $data);
-
-        // Success message
-        $this->session->set_flashdata(
-            'success',
-            'Account updated.'
-        );
-
-        redirect('/users');
     }
 
+
+    // ==============================
     // DELETE - Soft delete user
+    // ==============================
+
     public function delete($id)
     {
         $this->UsersModel->delete($id);
 
-        // Success message
         $this->session->set_flashdata(
             'success',
             'Account deleted.'

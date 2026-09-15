@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Users</title>
+    <title>Products</title>
 
 
     <style>
@@ -60,6 +60,17 @@
         h1 {
 
             margin: 0;
+
+        }
+
+
+        .header-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
 
         }
 
@@ -131,18 +142,18 @@
         }
 
 
-        .btn-products {
+        .btn-logout {
 
-            background: #16a34a;
+            background: #6b7280;
 
             color: white;
 
         }
 
 
-        .btn-products:hover {
+        .btn-logout:hover {
 
-            background: #15803d;
+            background: #4b5563;
 
         }
 
@@ -195,13 +206,13 @@
 
 
         th {
-            background: #f6e7a1;
-            color: #5c501c;
+            background: #f3b6c2;
+            color: #542832;
             padding: 16px;
             text-align: left;
             font-size: 16px;
             font-weight: 700;
-            border-bottom: 2px solid #e5d47a;
+            border-bottom: 2px solid #e89caa;
         }
 
 
@@ -244,27 +255,32 @@
 
     <div class="header">
 
-        <h1>Users</h1>
+
+        <h1>Products</h1>
 
 
-        <div>
-
-            <a
-                href="<?= site_url('/products'); ?>"
-                class="btn btn-products"
-            >
-                Products
-            </a>
+        <div class="header-actions">
 
 
             <a
-                href="<?= site_url('/users/create'); ?>"
+                href="<?= site_url('/products/create'); ?>"
                 class="btn btn-primary"
             >
-                Add User
+                Add Product
             </a>
 
+
+            <a
+                href="<?= site_url('/logout'); ?>"
+                class="btn btn-logout"
+                onclick="return confirm('Are you sure you want to logout?');"
+            >
+                Logout
+            </a>
+
+
         </div>
+
 
     </div>
 
@@ -283,7 +299,7 @@
     <div class="card">
 
 
-        <?php if (!empty($users)): ?>
+        <?php if (!empty($products)): ?>
 
 
             <table>
@@ -295,13 +311,13 @@
 
                         <th>ID</th>
 
-                        <th>First Name</th>
+                        <th>Product Name</th>
 
-                        <th>Last Name</th>
+                        <th>Description</th>
 
-                        <th>Email</th>
+                        <th>Price</th>
 
-                        <th>Username</th>
+                        <th>Quantity</th>
 
                         <th>Actions</th>
 
@@ -313,34 +329,44 @@
                 <tbody>
 
 
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($products as $product): ?>
 
 
                         <tr>
 
 
                             <td>
-                                <?= htmlspecialchars($user['id']); ?>
+
+                                <?= htmlspecialchars($product['id']); ?>
+
                             </td>
 
 
                             <td>
-                                <?= htmlspecialchars($user['firstname']); ?>
+
+                                <?= htmlspecialchars($product['product_name']); ?>
+
                             </td>
 
 
                             <td>
-                                <?= htmlspecialchars($user['lastname']); ?>
+
+                                <?= htmlspecialchars($product['description']); ?>
+
                             </td>
 
 
                             <td>
-                                <?= htmlspecialchars($user['email']); ?>
+
+                                <?= htmlspecialchars($product['price']); ?>
+
                             </td>
 
 
                             <td>
-                                <?= htmlspecialchars($user['username']); ?>
+
+                                <?= htmlspecialchars($product['quantity']); ?>
+
                             </td>
 
 
@@ -351,7 +377,7 @@
 
 
                                     <a
-                                        href="<?= site_url('/users/edit/' . $user['id']); ?>"
+                                        href="<?= site_url('/products/edit/' . $product['id']); ?>"
                                         class="btn btn-edit"
                                     >
                                         Edit
@@ -359,9 +385,9 @@
 
 
                                     <a
-                                        href="<?= site_url('/users/delete/' . $user['id']); ?>"
+                                        href="<?= site_url('/products/delete/' . $product['id']); ?>"
                                         class="btn btn-delete"
-                                        onclick="return confirm('Are you sure you want to delete this user?');"
+                                        onclick="return confirm('Are you sure you want to delete this product?');"
                                     >
                                         Delete
                                     </a>
@@ -390,7 +416,7 @@
 
             <div class="empty">
 
-                No users found.
+                No products found.
 
             </div>
 

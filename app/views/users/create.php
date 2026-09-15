@@ -10,69 +10,177 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Create Student</title>
+    <title>Create User</title>
+
 
     <style>
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+        * {
+            box-sizing: border-box;
         }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+
+            padding: 30px;
+
+            background: #f5f6f8;
+
+            color: #222;
+
+        }
+
 
         .container {
-            width: 500px;
+
+            max-width: 600px;
+
             margin: auto;
+
         }
+
+
+        .card {
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.05);
+
+        }
+
 
         h1 {
-            margin-bottom: 20px;
+
+            margin-top: 0;
+
+            margin-bottom: 25px;
+
         }
+
 
         .form-group {
-            margin-bottom: 15px;
+
+            margin-bottom: 18px;
+
         }
+
 
         label {
+
             display: block;
-            margin-bottom: 5px;
+
+            margin-bottom: 7px;
+
             font-weight: bold;
+
         }
+
 
         input {
+
             width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+
+            padding: 11px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
         }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #2563eb;
+
+        }
+
 
         .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 12px;
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            padding: 12px 15px;
+
+            border-radius: 6px;
+
             margin-bottom: 20px;
-            border: 1px solid #f5c6cb;
-            border-radius: 5px;
+
         }
 
-        .create-button {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+
+        .buttons {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 25px;
+
         }
 
-        .create-button:hover {
-            background-color: #218838;
-        }
 
-        .back-button {
-            display: inline-block;
-            margin-left: 10px;
-            color: #333;
+        .btn {
+
+            padding: 11px 18px;
+
+            border-radius: 6px;
+
             text-decoration: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 14px;
+
+        }
+
+
+        .btn-primary {
+
+            background: #2563eb;
+
+            color: white;
+
+        }
+
+
+        .btn-primary:hover {
+
+            background: #1d4ed8;
+
+        }
+
+
+        .btn-secondary {
+
+            background: #6b7280;
+
+            color: white;
+
+        }
+
+
+        .btn-secondary:hover {
+
+            background: #4b5563;
+
         }
 
     </style>
@@ -82,160 +190,177 @@
 
 <body>
 
+
 <div class="container">
 
-    <h1>Student Profile</h1>
+    <div class="card">
+
+        <h1>Create User</h1>
 
 
-    <!-- Display validation errors -->
+        <?php if (!empty($errors)): ?>
 
-    <?php if (validation_errors()): ?>
+            <div class="error">
 
-        <div class="error">
+                <?= $errors; ?>
 
-            <?= validation_errors(); ?>
+            </div>
 
-        </div>
-
-    <?php endif; ?>
+        <?php endif; ?>
 
 
-    <form action="/users/store" method="POST">
-
-
-        <!-- First Name -->
-
-        <div class="form-group">
-
-            <label for="firstname">
-                First Name
-            </label>
-
-            <input
-                type="text"
-                id="firstname"
-                name="firstname"
-                value="<?= set_value('firstname'); ?>"
-                placeholder="Enter first name"
-            >
-
-        </div>
-
-
-        <!-- Last Name -->
-
-        <div class="form-group">
-
-            <label for="lastname">
-                Last Name
-            </label>
-
-            <input
-                type="text"
-                id="lastname"
-                name="lastname"
-                value="<?= set_value('lastname'); ?>"
-                placeholder="Enter last name"
-            >
-
-        </div>
-
-
-        <!-- Email -->
-
-        <div class="form-group">
-
-            <label for="email">
-                Email
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                name="email"
-                value="<?= set_value('email'); ?>"
-                placeholder="Enter email"
-            >
-
-        </div>
-
-
-        <!-- Username -->
-
-        <div class="form-group">
-
-            <label for="username">
-                Username
-            </label>
-
-            <input
-                type="text"
-                id="username"
-                name="username"
-                value="<?= set_value('username'); ?>"
-                placeholder="Minimum 5 characters"
-            >
-
-        </div>
-
-
-        <!-- Password -->
-
-        <div class="form-group">
-
-            <label for="password">
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="Minimum 5 characters"
-            >
-
-        </div>
-
-
-        <!-- Confirm Password -->
-
-        <div class="form-group">
-
-            <label for="confirm_password">
-                Confirm Password
-            </label>
-
-            <input
-                type="password"
-                id="confirm_password"
-                name="confirm_password"
-                placeholder="Re-enter password"
-            >
-
-        </div>
-
-
-        <!-- Buttons -->
-
-        <button
-            type="submit"
-            class="create-button"
+        <form
+            action="<?= site_url('/users/store'); ?>"
+            method="POST"
         >
-            CREATE
-        </button>
 
 
-        <a
-            href="/users"
-            class="back-button"
-        >
-            Back to Users
-        </a>
+            <!-- First Name -->
+
+            <div class="form-group">
+
+                <label for="firstname">
+                    First Name
+                </label>
+
+                <input
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    value="<?= htmlspecialchars($_POST['firstname'] ?? ''); ?>"
+                    placeholder="Enter first name"
+                    required
+                >
+
+            </div>
 
 
-    </form>
+            <!-- Last Name -->
+
+            <div class="form-group">
+
+                <label for="lastname">
+                    Last Name
+                </label>
+
+                <input
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    value="<?= htmlspecialchars($_POST['lastname'] ?? ''); ?>"
+                    placeholder="Enter last name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="<?= htmlspecialchars($_POST['email'] ?? ''); ?>"
+                    placeholder="Enter email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value="<?= htmlspecialchars($_POST['username'] ?? ''); ?>"
+                    placeholder="Minimum 5 characters"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Minimum 5 characters"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Re-enter password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Create User
+                </button>
+
+
+                <a
+                    href="<?= site_url('/login'); ?>"
+                    class="btn btn-secondary"
+                >
+                    Back to Login
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
 
 </div>
+
 
 </body>
 
